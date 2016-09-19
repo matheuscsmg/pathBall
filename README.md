@@ -1,7 +1,7 @@
-# Corona SDK Composer GUI Demo Files
+# ESTAGIO 1
 ====================================
 
-##Credits: 
+##PATH BALL:
 
 ### Game artwork by: 
 Billy Wilson @ [Different by Design](http://www.dxdportfolio.com)
