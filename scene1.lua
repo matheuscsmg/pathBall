@@ -3,34 +3,278 @@
 -- scene.lua
 --
 ---------------------------------------------------------------------------------
+local physics = require('physics') -- Box2D physics
+local widget = require('widget') -- Buttons
+local physics = require("physics")
+--sounds.playStream('game_music')
+physics.start()
+physics.setGravity(0, 9.8)
+--physics.setDrawMode("hybrid")
 
+
+system.activate("multitouch")
 local sceneName = ...
 
 local composer = require( "composer" )
 
--- Load scene with same root filename as this file
+local background = display.newImage ("imagem/parede.png" , 250 , 370)
+--------------------------------------------------------------------------------
+local vida1 = display.newImage("imagem/vida.png")
+vida1.x = display.contentWidth/23
+vida1.y = display.contentHeight/1.1
+physics.addBody(vida1, "static", {bounce = 0.1,radius=15,friction = 1.0})
+
+local vida2 = display.newImage("imagem/vida.png")
+vida2.x = display.contentWidth/9
+vida2.y = display.contentHeight/1.1
+physics.addBody(vida2, "static", {bounce = 0.1,radius=15,friction = 1.0})
+
+local vida3 = display.newImage("imagem/vida.png")
+vida3.x = display.contentWidth/5.7
+vida3.y = display.contentHeight/1.1
+physics.addBody(vida3, "static", {bounce = 0.1,radius=15,friction = 1.0})
+
+local teste = 0
+local scores = display.newText( "0",830, 660, native.systemFontBold, 50 )
+scores:setFillColor( 100, 100, 100 )
+
+--criar paredes e limites na tela
+local paredeEsquerda = display.newRect(0, 370, 0, display.contentHeight)
+local paredeDireita = display.newRect(display.contentWidth,350,0,display.contentHeight)
+local celling = display.newRect(480,0.2,display.contentWidth,0)
+
+physics.addBody(paredeEsquerda, "static", {bounce = 0.1})
+physics.addBody(paredeDireita, "static", {bounce = 0.1})
+physics.addBody(celling, "static", {bounce = 0.1})
+
+
+--esconde o status bar (barra de cima do celualr)
+display.setStatusBar(display.HiddenStatusBar)
+
+local saidaLado = display.newImage("imagem/saidaLaranja.png")
+saidaLado.x = display.contentWidth
+saidaLado.y = display.contentHeight/2
+physics.addBody(saidaLado, "static", {bounce = 0.1,friction = 1.0})
+saidaLado.myname="laranja"
+
+local saidaLado2 = display.newImage("imagem/saidaLilaz.png")
+saidaLado2.x = display.contentWidth
+saidaLado2.y = display.contentHeight/2.9
+physics.addBody(saidaLado2, "static", {bounce = 0.1,friction = 1.0})
+saidaLado2.myname="lilaz"
+
+local saidaLado3 = display.newImage("imagem/saidaRosa.png")
+saidaLado3.x = display.contentWidth
+saidaLado3.y = display.contentHeight/1.5
+physics.addBody(saidaLado3, "static", {bounce = 0.1,friction = 1.0})
+saidaLado3.myname="rosa"
+
+local saidaLado4 = display.newImage("imagem/saidaMarron.png")
+saidaLado4.x = display.contentWidth/40
+saidaLado4.y = display.contentHeight/2.1
+physics.addBody(saidaLado4, "static", {bounce = 0.1,friction = 1.0})
+saidaLado4.myname="marron"
+
+local saidaLado5 = display.newImage("imagem/saidaMarfin.png")
+saidaLado5.x = display.contentWidth/40
+saidaLado5.y = display.contentHeight/3.1
+physics.addBody(saidaLado5, "static", {bounce = 0.1,friction = 1.0})
+saidaLado5.myname="marfin"
+
+local saidaLado6 = display.newImage("imagem/saidaGraviola.png")
+saidaLado6.x = display.contentWidth/40
+saidaLado6.y = display.contentHeight/1.6
+physics.addBody(saidaLado6, "static", {bounce = 0.1,friction = 1.0})
+saidaLado6.myname="graviola"
+
+---------------------------------------------------------------------------------------------
+
+local saida2 = display.newImage("imagem/saidaAzul.png")
+saida2.x = display.contentWidth/2
+saida2.y = display.contentHeight/12
+physics.addBody(saida2, "static", {bounce = 0.1,friction = 1.0})
+saida2.myname="azul"
+
+local saida3 = display.newImage("imagem/saidaVerde.png")
+saida3.x = display.contentWidth/2.7
+saida3.y = display.contentHeight/12
+physics.addBody(saida3, "static", {bounce = 0.1,friction = 1.0})
+saida3.myname="verde"
+
+local saida4 = display.newImage("imagem/saidaVermelho.png")
+saida4.x = display.contentWidth/4
+saida4.y = display.contentHeight/12
+physics.addBody(saida4, "static", {bounce = 0.1,friction = 1.0})
+saida4.myname="vermelho"
+
+local saida5 = display.newImage("imagem/saidaAmarelo.png")
+saida5.x = display.contentWidth/1.6
+saida5.y = display.contentHeight/12
+physics.addBody(saida5, "static", {bounce = 0.1,friction = 1.0})
+saida5.myname="amarelo"
+
+local saida6 = display.newImage("imagem/saidaCinza.png")
+saida6.x = display.contentWidth/1.3
+saida6.y = display.contentHeight/12
+physics.addBody(saida6, "static", {bounce = 0.1,friction = 1.0})
+saida6.myname="cinza"
+
+
+local mover = function(x,y,w,z,k)
+	function swapPosition( imgA, imgB)
+		tempX, tempY = imgA.x, imgA.y
+		imgA.x, imgA.y = imgB.x, imgB.y
+		imgB.x, imgB.y = tempX, tempY
+	end
+	function ponto_x1()
+		transition.to( x, {time=5000, swapPosition( x, y), y=60, onComplete = ponto_x2})
+	end
+
+	function ponto_x2()
+		transition.to( x, {time=2000, y=-629, onComplete = ponto_x1})
+	end
+
+	function ponto_x3()
+		transition.to( y, {time=4000, y=60, onComplete = ponto_x4})
+	end
+
+	function ponto_x4()
+		transition.to( y, {time=3000, y=-629, onComplete = ponto_x3})
+	end
+
+	function ponto_x5()
+		transition.to( w, {time=2000, y=60, swapPosition( w,k), onComplete = ponto_x6})
+	end
+
+	function ponto_x6()
+		transition.to( w, {time=6000, y=-629, onComplete = ponto_x5})
+	end
+
+	function ponto_x7()
+		transition.to( z, {time=5000, y=60, swapPosition( z,x), onComplete = ponto_x8})
+	end
+
+	function ponto_x8()
+		transition.to( z, {time=4200, y=-629, onComplete = ponto_x7})
+	end
+
+	function ponto_x9()
+		transition.to( k, {time=2000, y=60,  onComplete = ponto_x10})
+	end
+
+	function ponto_x10()
+		transition.to( k, {time=3000, y=-629, onComplete = ponto_x9})
+	end
+
+	ponto_x1()
+	ponto_x3()
+	ponto_x5()
+	ponto_x7()
+	ponto_x9()
+end
+
+mover(saida2,saida3,saida4,saida5,saida6)
+
+
+local mover2 = function(x,y,z)
+
+	function swapPosition( imgA, imgB)
+		tempX, tempY = imgA.x, imgA.y
+		imgA.x, imgA.y = imgB.x, imgB.y
+		imgB.x, imgB.y = tempX, tempY
+	end
+	function ponto_x11()
+		transition.to( x, {time=3000, swapPosition( x, y), x=60, onComplete = ponto_x22})
+	end
+
+	function ponto_x22()
+		transition.to( x, {time=2000, x=-629, onComplete = ponto_x11})
+	end
+
+	function ponto_x33()
+		transition.to( y, {time=4000, x=60, onComplete = ponto_x44})
+	end
+
+	function ponto_x44()
+		transition.to( y, {time=3500, x=-629, onComplete = ponto_x33})
+	end
+
+	function ponto_x55()
+		transition.to( z, {time=5000, swapPosition( y, z), x=60, onComplete = ponto_x66})
+	end
+
+	function ponto_x66()
+		transition.to( z, {time=4500, x=-629, onComplete = ponto_x55})
+	end
+
+	ponto_x11()
+	ponto_x33()
+	ponto_x55()
+end
+
+local mover3 = function(x,y,z)
+
+	function swapPosition( imgA, imgB)
+		tempX, tempY = imgA.x, imgA.y
+		imgA.x, imgA.y = imgB.x, imgB.y
+		imgB.x, imgB.y = tempX, tempY
+	end
+	function ponto_x77()
+		transition.to( x, {time=3000, swapPosition(x,y), x=910, onComplete = ponto_x88})
+	end
+
+	function ponto_x88()
+		transition.to( x, {time=3500, x=1950, onComplete = ponto_x77})
+	end
+
+	function ponto_x99()
+		transition.to( y, {time=4000, x=910, onComplete = ponto_x100})
+	end
+
+	function ponto_x100()
+		transition.to( y, {time=2000, x=1950, onComplete = ponto_x99})
+	end
+
+	function ponto_x110()
+		transition.to( z, {time=5000, swapPosition(y,z), x=910, onComplete = ponto_x120})
+	end
+
+	function ponto_x120()
+		transition.to( z, {time=6000, x=1950, onComplete = ponto_x110})
+	end
+
+	ponto_x77()
+	ponto_x99()
+	ponto_x110()
+end
+
+mover2(saidaLado4,saidaLado5,saidaLado6)
+mover3(saidaLado,saidaLado2,saidaLado3)
+
+
+
+--------------------------------------------------------------------------------
+
 local scene = composer.newScene( sceneName )
-
-local background = display.newImage('imagem/parede.png', 490, 349)
-
 
 ---------------------------------------------------------------------------------
 
 function scene:create( event )
     local sceneGroup = self.view
 
---     --------------------------------------------------------------------------------
---     -- Build Camera
---     --------------------------------------------------------------------------------
-    local perspective = require("perspective")  -- Code Exchange library to manage camera view
-    local camera = perspective.createView(3)
-
---     --------------------------------------------------------------------------------
-
-    local target = display.newImage( "640x1136/target.png" )
+    local target = display.newImage( "imagem/target.png" )
     target:scale( 0.25, 0.25 )
---     -- Shoot the  ball, using a visible force vector
+--
     function shootPlasma( event )
+
+		local function onLocalCollision( self, event )
+		end
+		local function removeSinal (objeto)
+		end
+		local function apareceSinal()
+		end
+
+		local pontos = 0
 
         local t = event.target
         local phase = event.phase
@@ -49,7 +293,7 @@ function scene:create( event )
 
             Runtime:addEventListener( "enterFrame", startRotation )
 
-            local showTarget = transition.to( target, { alpha=0.4, xScale=0.4, yScale=0.4, time=200 } )
+            local showTarget = transition.to( target, { alpha=0.4, xScale=0.4, yScale=0.4, time=4000 } )
             myLine = nil
 
         elseif t.isFocus then
@@ -72,116 +316,191 @@ function scene:create( event )
                     Runtime:removeEventListener( "enterFrame", startRotation )
                 end
 
-                local hideTarget = transition.to( target, { alpha=0, xScale=1.0, yScale=1.0, time=200, onComplete=stopRotation } )
+                local hideTarget = transition.to( target, { alpha=0, xScale=1.0, yScale=1.0, time=4000, onComplete=stopRotation } )
 
                 if ( myLine ) then
                     myLine.parent:remove( myLine )
                 end
 
-                local plasma = display.newImage( "imagem/bola.png" )
-                plasma.width = 80
-                plasma.height = 80
-                plasma.x = t.x
+				local plasma = display.newImage( "imagem/bola.png" )
+				plasma.width = 65
+				plasma.height = 65
+				plasma.x = t.x
                 plasma.y = t.y
-                physics.addBody( plasma, { density=3, friction=1.0, bounce=.2, radius=40 } )
-                plasma:applyForce( 70*(t.x - event.x), 70*(t.y - event.y), t.x, t.y )
+                physics.addBody( plasma, {bounce = 0.9, radius = 25, friction = 3.0} )
+				plasma:applyForce( 70*(t.x - event.x), 70*(t.y - event.y), t.x, t.y )
 
-                camera:add(plasma, 1)
-                camera.damping = 10 -- A bit more fluid tracking
+				local sinal1 = display.newImage("imagem/circuloLilaz.png")
+				sinal1.x = display.contentWidth/2
+				sinal1.y = display.contentHeight/1.1
+				physics.addBody(sinal1, "static", {bounce = 0.1,friction = 1.0})
+				sinal1.myname="lilaz"
+				sinal1.numero=1
 
-                -- Only start the camera tracking when the penguin has moved pasted the center of the view port
-                local function trackPlasma( event )
-                    if plasma.x > 600 then
-                        camera:setFocus(plasma) -- Set the focus to the penguin so it tracks it
-                    end
-                end
+				local sinal2 = display.newImage("imagem/circuloAzul.png")
+				sinal2.x = display.contentWidth/2
+				sinal2.y = display.contentHeight/1.1
+				physics.addBody(sinal2, "static", {bounce = 0.1,friction = 1.0})
+				sinal2.myname="azul"
+				sinal2.numero=2
 
-                Runtime:addEventListener( 'enterFrame', trackPlasma )
-            end
+				local sinal3 = display.newImage("imagem/circuloAmarelo.png")
+				sinal3.x = display.contentWidth/2
+				sinal3.y = display.contentHeight/1.1
+				physics.addBody(sinal3, "static", {bounce = 0.1,friction = 1.0})
+				sinal3.myname="amarelo"
+				sinal3.numero=3
+
+				local sinal4 = display.newImage("imagem/circuloVerde.png")
+				sinal4.x = display.contentWidth/2
+				sinal4.y = display.contentHeight/1.1
+				physics.addBody(sinal4, "static", {bounce = 0.1,friction = 1.0})
+				sinal4.myname="verde"
+				sinal4.numero=4
+
+				local sinal5 = display.newImage("imagem/circuloVermelho.png")
+				sinal5.x = display.contentWidth/2
+				sinal5.y = display.contentHeight/1.1
+				physics.addBody(sinal5, "static", {bounce = 0.1,friction = 1.0})
+				sinal5.myname="vermelho"
+				sinal5.numero=5
+
+				local sinal6 = display.newImage("imagem/circuloMarfin.png")
+				sinal6.x = display.contentWidth/2
+				sinal6.y = display.contentHeight/1.1
+				physics.addBody(sinal6, "static", {bounce = 0.1,friction = 1.0})
+				sinal6.myname="marfin"
+				sinal6.numero=6
+
+				local sinal7 = display.newImage("imagem/circuloMarron.png")
+				sinal7.x = display.contentWidth/2
+				sinal7.y = display.contentHeight/1.1
+				physics.addBody(sinal7, "static", {bounce = 0.1,friction = 1.0})
+				sinal7.myname="marron"
+				sinal7.numero=7
+
+				local sinal8 = display.newImage("imagem/circuloRosa.png")
+				sinal8.x = display.contentWidth/2
+				sinal8.y = display.contentHeight/1.1
+				physics.addBody(sinal8, "static", {bounce = 0.1,friction = 1.0})
+				sinal8.myname="rosa"
+				sinal8.numero = 8
+
+				local sinal9 = display.newImage("imagem/circuloGraviola.png")
+				sinal9.x = display.contentWidth/2
+				sinal9.y = display.contentHeight/1.1
+				physics.addBody(sinal9, "static", {bounce = 0.1,friction = 1.0})
+				sinal9.myname="graviola"
+				sinal9.numero= 9
+
+				local sinal10 = display.newImage("imagem/circuloCinza.png")
+				sinal10.x = display.contentWidth/2
+				sinal10.y = display.contentHeight/1.1
+				physics.addBody(sinal10, "static", {bounce = 0.1,friction = 1.0})
+				sinal10.myname="cinza"
+				sinal10.numero=10
+
+				local sinal11 = display.newImage("imagem/circuloLaranja.png")
+				sinal11.x = display.contentWidth/2
+				sinal11.y = display.contentHeight/1.1
+				physics.addBody(sinal11, "static", {bounce = 0.1,friction = 1.0})
+				sinal11.myname="laranja"
+				sinal11.numero=11
+
+
+
+				sinal1:addEventListener( "touch", shootPlasma)
+				sinal2:addEventListener( "touch", shootPlasma)
+				sinal3:addEventListener( "touch", shootPlasma)
+				sinal4:addEventListener( "touch", shootPlasma)
+				sinal5:addEventListener( "touch", shootPlasma)
+				sinal6:addEventListener( "touch", shootPlasma)
+				sinal7:addEventListener( "touch", shootPlasma)
+				sinal8:addEventListener( "touch", shootPlasma)
+				sinal9:addEventListener( "touch", shootPlasma)
+				sinal10:addEventListener( "touch", shootPlasma)
+				sinal11:addEventListener( "touch", shootPlasma)
+				local teste2
+
+				local vetor = {}
+				vetor[0] = sinal1
+				vetor[1] = sinal2
+				vetor[2] = sinal3
+				vetor[3] = sinal4
+				vetor[4] = sinal5
+				vetor[5] = sinal6
+				vetor[6] = sinal7
+				vetor[7] = sinal8
+				vetor[8] = sinal9
+				vetor[9] = sinal10
+				vetor[10] = sinal11
+
+				local function removeSinal (objeto)
+					for x = 0, 10, 1 do
+						if (vetor[x] == objeto) then
+							objeto:removeSelf()
+						end
+					end
+					apareceSinal()
+				end
+
+				local function onLocalCollision( self, event )
+					if ( event.phase == "ended" ) then
+						pontos = pontos + 10
+						plasma:removeSelf()
+						removeSinal(teste2)
+					end
+				end
+				local function onLocalCollision2( self, event )
+					if ( event.phase == "ended") then
+						if teste == 0 then
+							vida1:removeSelf()
+							teste=teste+1
+						elseif (teste==1) then
+							vida2:removeSelf()
+							teste=teste+1
+						end
+					end
+				end
+
+				local function apareceSinal ()
+					x= math.random(1,10)
+					teste2 = vetor[x]
+					teste2.collision = onLocalCollision
+					teste2:addEventListener( "collision" )
+				end
+
+				saida2.collision = onLocalCollision
+				saida2:addEventListener( "collision" )
+				saidaLado2.collision = onLocalCollision2
+				saidaLado2:addEventListener( "collision" )
+			end
         end
-        return true -- Stop further propagation of touch event
-    end
-
-	local canhao = display.newImage("imagem/canhao.png")
-canhao.x = display.contentWidth/12
-canhao.y = display.contentHeight/1.4
-physics.addBody(canhao, "static", {bounce = 0.1,radius=35,friction = 1.0})
-
-    local background2 = self:getObjectByName( "background" )
-    local gameGroup = self:getObjectByName( "gameGroup" )
-
-    local ufo = self:getObjectByName( "canhao" )
-
-    ufo:addEventListener( "touch", shootPlasma )
-
-
-
-    ------------------------------------------------------------
-    -- Camera code
-
-    camera:setParallax(1,.6)
-    camera:add( background, 2 )
-    camera:add( gameGroup, 1 )
-
-    camera:setBounds( 0, 1480, 320, 320 ) -- used to keep our view from going outside the background
-    -- print (camera:layerCount())
-    ------------------------------------------------------------
-
-
-end
-
-function scene:show( event )
-    local sceneGroup = self.view
-    local phase = event.phase
-
-    if phase == "will" then
-        -- Called when the scene is still off screen and is about to move on screen
-
-    elseif phase == "did" then
-        -- Called when the scene is now on screen
-        --
-        -- INSERT code here to make the scene come alive
-        -- e.g. start timers, begin animation, play audio, etc
-
-        -- we obtain the object by id from the scene's object hierarchy
-
+		local function incrementaTexto (event)
+			scores.text = math.floor (pontos)
+		end
+		Runtime:addEventListener( "enterFrame", incrementaTexto )
+		return true
+		-- Stop further propagation of touch event
 
     end
+
+	local sinal1 = display.newImage("imagem/circuloLilaz.png")
+	sinal1.x = display.contentWidth/2
+	sinal1.y = display.contentHeight/1.1
+	physics.addBody(sinal1, "static", {bounce = 0.1,friction = 1.0})
+	sinal1.myname="lilaz"
+	sinal1.numero=1
+
+	sinal1:addEventListener( "touch", shootPlasma)
+
 end
-
-function scene:hide( event )
-    local sceneGroup = self.view
-    local phase = event.phase
-
-    if event.phase == "will" then
-        -- Called when the scene is on screen and is about to move off screen
-        --
-        -- INSERT code here to pause the scene
-        -- e.g. stop timers, stop animation, unload sounds, etc.)
-    elseif phase == "did" then
-        -- Called when the scene is now off screen
-
-    end
-end
-
-
-function scene:destroy( event )
-    local sceneGroup = self.view
-
-    -- Called prior to the removal of scene's "view" (sceneGroup)
-    --
-    -- INSERT code here to cleanup the scene
-    -- e.g. remove display objects, remove touch listeners, save state, etc
-end
-
----------------------------------------------------------------------------------
+---------------------------------------------------------------------------
 
 -- Listener setup
 scene:addEventListener( "create", scene )
-scene:addEventListener( "show", scene )
-scene:addEventListener( "hide", scene )
-scene:addEventListener( "destroy", scene )
 
 ---------------------------------------------------------------------------------
+
 
 return scene
