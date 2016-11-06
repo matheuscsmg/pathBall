@@ -260,18 +260,17 @@ local scene = composer.newScene( sceneName )
 ---------------------------------------------------------------------------------
 
 function scene:create( event )
+	local teste1
+	teste1=0
     local sceneGroup = self.view
 
     local target = display.newImage( "imagem/target.png" )
     target:scale( 0.25, 0.25 )
 --
     function shootPlasma( event )
-
 		local function onLocalCollision( self, event )
 		end
-		local function removeSinal (objeto)
-		end
-		local function apareceSinal()
+		local function bringToFront10(event)
 		end
 
 		local pontos = 0
@@ -407,48 +406,117 @@ function scene:create( event )
 				sinal11.myname="laranja"
 				sinal11.numero=11
 
-
-
-				sinal1:addEventListener( "touch", shootPlasma)
-				sinal2:addEventListener( "touch", shootPlasma)
-				sinal3:addEventListener( "touch", shootPlasma)
-				sinal4:addEventListener( "touch", shootPlasma)
-				sinal5:addEventListener( "touch", shootPlasma)
-				sinal6:addEventListener( "touch", shootPlasma)
-				sinal7:addEventListener( "touch", shootPlasma)
-				sinal8:addEventListener( "touch", shootPlasma)
-				sinal9:addEventListener( "touch", shootPlasma)
-				sinal10:addEventListener( "touch", shootPlasma)
-				sinal11:addEventListener( "touch", shootPlasma)
-				local teste2
-
-				local vetor = {}
-				vetor[0] = sinal1
-				vetor[1] = sinal2
-				vetor[2] = sinal3
-				vetor[3] = sinal4
-				vetor[4] = sinal5
-				vetor[5] = sinal6
-				vetor[6] = sinal7
-				vetor[7] = sinal8
-				vetor[8] = sinal9
-				vetor[9] = sinal10
-				vetor[10] = sinal11
-
-				local function removeSinal (objeto)
-					for x = 0, 10, 1 do
-						if (vetor[x] == objeto) then
-							objeto:removeSelf()
-						end
+				local function bringToFront3( event )
+					if ( event.phase == "began" ) then
+						sinal3:toFront()
+						sinal5:removeSelf()
+						sinal3:addEventListener( "touch", shootPlasma)
+						sinal3:addEventListener( "touch", bringToFront10 )
 					end
-					apareceSinal()
+					return true
 				end
 
-				local function onLocalCollision( self, event )
+				local function bringToFront5( event )
+					if ( event.phase == "began" ) then
+						sinal5:toFront()
+						sinal4:removeSelf()
+						sinal5:addEventListener( "touch", shootPlasma)
+						sinal5:addEventListener( "touch", bringToFront3 )
+					end
+					return true
+				end
+
+				local function bringToFront4( event )
+					if ( event.phase == "began" ) then
+						sinal4:toFront()
+						sinal8:removeSelf()
+						sinal4:addEventListener( "touch", shootPlasma)
+						sinal4:addEventListener( "touch", bringToFront5 )
+					end
+					return true
+				end
+
+				local function bringToFront8( event )
+					if ( event.phase == "began" ) then
+						sinal8:toFront()
+						sinal2:removeSelf()
+						sinal8:addEventListener( "touch", shootPlasma)
+						sinal8:addEventListener( "touch", bringToFront4 )
+					end
+					return true
+				end
+
+				local function bringToFront2( event )
+					if ( event.phase == "began" ) then
+						sinal2:toFront()
+						sinal7:removeSelf()
+						sinal2:addEventListener( "touch", shootPlasma)
+						sinal2:addEventListener( "touch", bringToFront8 )
+					end
+					return true
+				end
+
+				local function bringToFront7( event )
+					if ( event.phase == "began" ) then
+						sinal7:toFront()
+						sinal1:removeSelf()
+						sinal7:addEventListener( "touch", shootPlasma)
+						sinal7:addEventListener( "touch", bringToFront2 )
+					end
+					return true
+				end
+
+				local function bringToFront1( event )
+					if ( event.phase == "began" ) then
+						sinal1:toFront()
+						sinal6:removeSelf()
+						sinal1:addEventListener( "touch", shootPlasma)
+						sinal1:addEventListener( "touch", bringToFront7 )
+					end
+					return true
+				end
+
+				local function bringToFront6( event )
+					if ( event.phase == "began" ) then
+						sinal6:toFront()
+						sinal9:removeSelf()
+						sinal6:addEventListener( "touch", shootPlasma)
+						sinal6:addEventListener( "touch", bringToFront1 )
+					end
+					return true
+				end
+
+				local function bringToFront9( event )
+					if ( event.phase == "began" ) then
+						sinal9:toFront()
+						sinal10:removeSelf()
+						sinal9:addEventListener( "touch", shootPlasma)
+						sinal9:addEventListener( "touch", bringToFront6 )
+					end
+					return true
+				end
+
+				local function bringToFront10( event )
+					if ( event.phase == "began" ) then
+						sinal10:toFront()
+						sinal11:removeSelf()
+						sinal10:addEventListener( "touch", shootPlasma)
+						sinal10:addEventListener( "touch", bringToFront9)
+					end
+					return true
+				end
+
+
+				sinal11:addEventListener( "touch", shootPlasma)
+				sinal11: addEventListener( "touch", bringToFront10 )
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+				local function onLocalCollision11( self, event )
 					if ( event.phase == "ended" ) then
 						pontos = pontos + 10
 						plasma:removeSelf()
-						removeSinal(teste2)
 					end
 				end
 				local function onLocalCollision2( self, event )
@@ -463,15 +531,9 @@ function scene:create( event )
 					end
 				end
 
-				local function apareceSinal ()
-					x= math.random(1,10)
-					teste2 = vetor[x]
-					teste2.collision = onLocalCollision
-					teste2:addEventListener( "collision" )
-				end
+				saidaLado.collision = onLocalCollision11
+				saidaLado:addEventListener( "collision" )
 
-				saida2.collision = onLocalCollision
-				saida2:addEventListener( "collision" )
 				saidaLado2.collision = onLocalCollision2
 				saidaLado2:addEventListener( "collision" )
 			end
@@ -485,14 +547,14 @@ function scene:create( event )
 
     end
 
-	local sinal1 = display.newImage("imagem/circuloLilaz.png")
-	sinal1.x = display.contentWidth/2
-	sinal1.y = display.contentHeight/1.1
-	physics.addBody(sinal1, "static", {bounce = 0.1,friction = 1.0})
-	sinal1.myname="lilaz"
-	sinal1.numero=1
+	local start = display.newImage("imagem/start.png")
+	start.x = display.contentWidth/2
+	start.y = display.contentHeight/1.1
+	physics.addBody(start, "static", {bounce = 0.1,friction = 1.0})
+	start.myname="start"
+	start.numero=12
 
-	sinal1:addEventListener( "touch", shootPlasma)
+	start:addEventListener( "touch", shootPlasma)
 
 end
 ---------------------------------------------------------------------------
