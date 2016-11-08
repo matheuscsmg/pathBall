@@ -118,6 +118,7 @@ saida6.x = display.contentWidth/1.3
 saida6.y = display.contentHeight/12
 physics.addBody(saida6, "static", {bounce = 0.1,friction = 1.0})
 saida6.myname="cinza"
+saida6.numero=9
 
 
 local mover = function(x,y,w,z,k)
@@ -260,74 +261,17 @@ local scene = composer.newScene( sceneName )
 ---------------------------------------------------------------------------------
 
 function scene:create( event )
-	local teste1
-	teste1=0
+
     local sceneGroup = self.view
 
     local target = display.newImage( "imagem/target.png" )
     target:scale( 0.25, 0.25 )
---
+
     function shootPlasma( event )
-		local function onLocalCollision( self, event )
+		local teste1
+
+		local function bringToFront10( event )
 		end
-		local function bringToFront10(event)
-		end
-
-		local pontos = 0
-
-        local t = event.target
-        local phase = event.phase
-        local startRotation -- fwd decl
-
-        if "began" == phase then
-            display.getCurrentStage():setFocus( t )
-            t.isFocus = true
-
-            target.x = t.x
-            target.y = t.y
-
-            startRotation = function()
-                target.rotation = target.rotation + 4
-            end
-
-            Runtime:addEventListener( "enterFrame", startRotation )
-
-            local showTarget = transition.to( target, { alpha=0.4, xScale=0.4, yScale=0.4, time=4000 } )
-            myLine = nil
-
-        elseif t.isFocus then
-
-            if "moved" == phase then
-
-                if ( myLine ) then
-                    myLine.parent:remove( myLine ) -- erase previous line, if any
-                end
-                myLine = display.newLine( t.x,t.y, event.x,event.y )
-                myLine:setStrokeColor( 1, 1, 1, 50/255 )
-                myLine.strokeWidth = 15
-
-            elseif "ended" == phase or "cancelled" == phase then
-
-                display.getCurrentStage():setFocus( nil )
-                t.isFocus = false
-
-                local stopRotation = function()
-                    Runtime:removeEventListener( "enterFrame", startRotation )
-                end
-
-                local hideTarget = transition.to( target, { alpha=0, xScale=1.0, yScale=1.0, time=4000, onComplete=stopRotation } )
-
-                if ( myLine ) then
-                    myLine.parent:remove( myLine )
-                end
-
-				local plasma = display.newImage( "imagem/bola.png" )
-				plasma.width = 65
-				plasma.height = 65
-				plasma.x = t.x
-                plasma.y = t.y
-                physics.addBody( plasma, {bounce = 0.9, radius = 25, friction = 3.0} )
-				plasma:applyForce( 70*(t.x - event.x), 70*(t.y - event.y), t.x, t.y )
 
 				local sinal1 = display.newImage("imagem/circuloLilaz.png")
 				sinal1.x = display.contentWidth/2
@@ -406,11 +350,185 @@ function scene:create( event )
 				sinal11.myname="laranja"
 				sinal11.numero=11
 
+		local function onLocalCollision( self, event )
+		end
+		local function bringToFront6(event)
+		end
+		local function bringToFront1( event )
+		end
+		local function bringToFront9( event )
+		end
+
+		local pontos = 0
+
+
+
+		local function plasmaTeste (objeto)
+			local function onLocalCollision18( self, event )
+				if ( event.phase == "ended" and sinal9.numero==saida6.numero ) then
+					objeto:removeSelf()
+					pontos = pontos +10
+					sinal9:addEventListener("touch", bringToFront6)
+				else
+					objeto:removeSelf()
+					if teste == 0 then
+							vida1:removeSelf()
+							teste=teste+1
+					elseif (teste==1) then
+							vida2:removeSelf()
+							teste=teste+1
+					end
+				end
+			end
+
+			saida6.collision = onLocalCollision18
+			saida6:addEventListener( "collision" )
+		end
+
+		local vetor = {}
+		vetor[0] = 0
+		vetor[1] = 1
+		vetor[2] = 2
+		vetor[3] = 3
+		vetor[4] = 4
+		vetor[5] = 5
+		vetor[6] = 6
+		vetor[7] = 7
+		vetor[8] = 8
+		vetor[9] = 9
+		vetor[10] = 10
+
+		local index = math.random (0,10)
+		teste1 = vetor[index]
+
+        local t = event.target
+        local phase = event.phase
+        local startRotation -- fwd decl
+
+        if "began" == phase then
+            display.getCurrentStage():setFocus( t )
+            t.isFocus = true
+
+            target.x = t.x
+            target.y = t.y
+
+            startRotation = function()
+                target.rotation = target.rotation + 4
+            end
+
+            Runtime:addEventListener( "enterFrame", startRotation )
+
+            local showTarget = transition.to( target, { alpha=0.4, xScale=0.4, yScale=0.4, time=4000 } )
+            myLine = nil
+
+        elseif t.isFocus then
+
+            if "moved" == phase then
+
+                if ( myLine ) then
+                    myLine.parent:remove( myLine ) -- erase previous line, if any
+                end
+                myLine = display.newLine( t.x,t.y, event.x,event.y )
+                myLine:setStrokeColor( 1, 1, 1, 50/255 )
+                myLine.strokeWidth = 15
+
+            elseif "ended" == phase or "cancelled" == phase then
+
+                display.getCurrentStage():setFocus( nil )
+                t.isFocus = false
+
+                local stopRotation = function()
+                    Runtime:removeEventListener( "enterFrame", startRotation )
+                end
+
+                local hideTarget = transition.to( target, { alpha=0, xScale=1.0, yScale=1.0, time=4000, onComplete=stopRotation } )
+
+                if ( myLine ) then
+                    myLine.parent:remove( myLine )
+                end
+				local plasma = display.newImage( "imagem/bola.png" )
+				plasma.width = 65
+				plasma.height = 65
+				plasma.x = t.x
+				plasma.y = t.y
+				physics.addBody( plasma, {bounce = 0.9, radius = 25, friction = 3.0} )
+				plasma:applyForce( 70*(t.x - event.x), 70*(t.y - event.y), t.x, t.y )
+
+
+		local function matheus (event)
+
+			local t = event.target
+			local phase = event.phase
+			local startRotation -- fwd decl
+
+			if "began" == phase then
+				display.getCurrentStage():setFocus( t )
+				t.isFocus = true
+
+				target.x = t.x
+				target.y = t.y
+
+				startRotation = function()
+					target.rotation = target.rotation + 4
+				end
+
+				Runtime:addEventListener( "enterFrame", startRotation )
+
+				local showTarget = transition.to( target, { alpha=0.4, xScale=0.4, yScale=0.4, time=4000 } )
+				myLine = nil
+
+			elseif t.isFocus then
+
+				if "moved" == phase then
+
+					if ( myLine ) then
+						myLine.parent:remove( myLine ) -- erase previous line, if any
+					end
+					myLine = display.newLine( t.x,t.y, event.x,event.y )
+					myLine:setStrokeColor( 1, 1, 1, 50/255 )
+					myLine.strokeWidth = 15
+
+				elseif "ended" == phase or "cancelled" == phase then
+
+					display.getCurrentStage():setFocus( nil )
+					t.isFocus = false
+
+					local stopRotation = function()
+						Runtime:removeEventListener( "enterFrame", startRotation )
+					end
+
+					local hideTarget = transition.to( target, { alpha=0, xScale=1.0, yScale=1.0, time=4000, onComplete=stopRotation } )
+
+					if ( myLine ) then
+						myLine.parent:remove( myLine )
+					end
+
+					local plasma = display.newImage( "imagem/bola.png" )
+					plasma.width = 65
+					plasma.height = 65
+					plasma.x = t.x
+					plasma.y = t.y
+					physics.addBody( plasma, {bounce = 0.9, radius = 25, friction = 3.0} )
+					plasma:applyForce( 70*(t.x - event.x), 70*(t.y - event.y), t.x, t.y )
+
+
+					local function onLocalCollision( self, event )
+						if ( event.phase == "ended") then
+							plasmaTeste(plasma)
+						end
+					end
+
+				plasma.collision = onLocalCollision
+				plasma:addEventListener( "collision" )
+				end
+			end
+		end
+
 				local function bringToFront3( event )
 					if ( event.phase == "began" ) then
 						sinal3:toFront()
 						sinal5:removeSelf()
-						sinal3:addEventListener( "touch", shootPlasma)
+						sinal3:addEventListener( "touch", matheus)
 						sinal3:addEventListener( "touch", bringToFront10 )
 					end
 					return true
@@ -420,7 +538,7 @@ function scene:create( event )
 					if ( event.phase == "began" ) then
 						sinal5:toFront()
 						sinal4:removeSelf()
-						sinal5:addEventListener( "touch", shootPlasma)
+						sinal5:addEventListener( "touch", matheus)
 						sinal5:addEventListener( "touch", bringToFront3 )
 					end
 					return true
@@ -439,7 +557,6 @@ function scene:create( event )
 				local function bringToFront8( event )
 					if ( event.phase == "began" ) then
 						sinal8:toFront()
-						sinal2:removeSelf()
 						sinal8:addEventListener( "touch", shootPlasma)
 						sinal8:addEventListener( "touch", bringToFront4 )
 					end
@@ -449,7 +566,6 @@ function scene:create( event )
 				local function bringToFront2( event )
 					if ( event.phase == "began" ) then
 						sinal2:toFront()
-						sinal7:removeSelf()
 						sinal2:addEventListener( "touch", shootPlasma)
 						sinal2:addEventListener( "touch", bringToFront8 )
 					end
@@ -459,7 +575,6 @@ function scene:create( event )
 				local function bringToFront7( event )
 					if ( event.phase == "began" ) then
 						sinal7:toFront()
-						sinal1:removeSelf()
 						sinal7:addEventListener( "touch", shootPlasma)
 						sinal7:addEventListener( "touch", bringToFront2 )
 					end
@@ -469,8 +584,7 @@ function scene:create( event )
 				local function bringToFront1( event )
 					if ( event.phase == "began" ) then
 						sinal1:toFront()
-						sinal6:removeSelf()
-						sinal1:addEventListener( "touch", shootPlasma)
+						sinal1:addEventListener( "touch", matheus)
 						sinal1:addEventListener( "touch", bringToFront7 )
 					end
 					return true
@@ -479,9 +593,7 @@ function scene:create( event )
 				local function bringToFront6( event )
 					if ( event.phase == "began" ) then
 						sinal6:toFront()
-						sinal9:removeSelf()
-						sinal6:addEventListener( "touch", shootPlasma)
-						sinal6:addEventListener( "touch", bringToFront1 )
+						sinal6:addEventListener( "touch", matheus)
 					end
 					return true
 				end
@@ -489,34 +601,86 @@ function scene:create( event )
 				local function bringToFront9( event )
 					if ( event.phase == "began" ) then
 						sinal9:toFront()
-						sinal10:removeSelf()
-						sinal9:addEventListener( "touch", shootPlasma)
-						sinal9:addEventListener( "touch", bringToFront6 )
+						sinal9:addEventListener( "touch", matheus)
 					end
 					return true
 				end
 
 				local function bringToFront10( event )
-					if ( event.phase == "began" ) then
+					if ( event.phase == "began") then
 						sinal10:toFront()
-						sinal11:removeSelf()
-						sinal10:addEventListener( "touch", shootPlasma)
+						sinal10:addEventListener ("touch", matheus)
 						sinal10:addEventListener( "touch", bringToFront9)
 					end
 					return true
 				end
 
 
-				sinal11:addEventListener( "touch", shootPlasma)
-				sinal11: addEventListener( "touch", bringToFront10 )
 
-------------------------------------------------------------------------------------------------------------------------
+				if (teste1==0) then
+					sinal11: addEventListener( "touch", matheus )
+				end
 
+				if (teste1==1) then
+					sinal10:addEventListener("touch", bringToFront10)
+				end
+
+				if (teste1==2) then
+					sinal9:addEventListener( "touch", matheus)
+					sinal9:addEventListener("touch", bringToFront9)
+				end
+
+				if (teste1==3) then
+					sinal8:addEventListener("touch", bringToFront8)
+				end
+
+				if (teste1==4) then
+					sinal7:addEventListener("touch", bringToFront7)
+				end
+
+				if (teste1==5) then
+					sinal6:addEventListener("touch", bringToFront6)
+				end
+
+				if (teste1==6) then
+					sinal5:addEventListener("touch", bringToFront5)
+				end
+
+				if (teste1==7) then
+					sinal4:addEventListener("touch", bringToFront4)
+				end
+
+				if (teste1==8) then
+					sinal3:addEventListener("touch", bringToFront3)
+				end
+
+				if (teste1==9) then
+					sinal2:addEventListener("touch", bringToFront2)
+				end
+
+				if (teste1==10) then
+					sinal1:addEventListener("touch", bringToFront1)
+				end
+----------------------------------------------------------------------------------	--------------------------------------
+
+				local function onLocalCollision8( self, event )
+					if ( event.phase == "ended" ) then
+						pontos = pontos + 10
+						sinal8: addEventListener( "touch", bringToFront7 )
+					end
+				end
+
+				local function onLocalCollision10( self, event )
+					if ( event.phase == "ended" ) then
+						pontos = pontos + 10
+						sinal10: addEventListener( "touch", bringToFront9 )
+					end
+				end
 
 				local function onLocalCollision11( self, event )
 					if ( event.phase == "ended" ) then
 						pontos = pontos + 10
-						plasma:removeSelf()
+						sinal11: addEventListener( "touch", bringToFront10 )
 					end
 				end
 				local function onLocalCollision2( self, event )
@@ -534,8 +698,11 @@ function scene:create( event )
 				saidaLado.collision = onLocalCollision11
 				saidaLado:addEventListener( "collision" )
 
-				saidaLado2.collision = onLocalCollision2
-				saidaLado2:addEventListener( "collision" )
+				saida6.collision = onLocalCollision10
+				saida6:addEventListener( "collision" )
+
+				saidaLado3.collision = onLocalCollision8
+				saidaLado3:addEventListener( "collision" )
 			end
         end
 		local function incrementaTexto (event)
