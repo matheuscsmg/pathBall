@@ -120,7 +120,6 @@ physics.addBody(saida6, "static", {bounce = 0.1,friction = 1.0})
 saida6.myname="cinza"
 saida6.numero=9
 
-
 local mover = function(x,y,w,z,k)
 	function swapPosition( imgA, imgB)
 		tempX, tempY = imgA.x, imgA.y
@@ -258,6 +257,10 @@ mover3(saidaLado,saidaLado2,saidaLado3)
 
 local scene = composer.newScene( sceneName )
 
+
+--local backgroundMusic = audio.loadStream("sounds/jogo.mp3")
+
+--local backgroundMusicChannel = audio.play( backgroundMusic, { channel=15, loops=15, fadein=5000 } )
 ---------------------------------------------------------------------------------
 
 function scene:create( event )
@@ -271,6 +274,15 @@ function scene:create( event )
 		local teste1
 
 		local function bringToFront10( event )
+		end
+
+		local function onLocalCollision( self, event )
+		end
+		local function bringToFront6(event)
+		end
+		local function bringToFront1( event )
+		end
+		local function bringToFront9( event )
 		end
 
 				local sinal1 = display.newImage("imagem/circuloLilaz.png")
@@ -350,38 +362,47 @@ function scene:create( event )
 				sinal11.myname="laranja"
 				sinal11.numero=11
 
-		local function onLocalCollision( self, event )
-		end
-		local function bringToFront6(event)
-		end
-		local function bringToFront1( event )
-		end
-		local function bringToFront9( event )
-		end
-
 		local pontos = 0
 
-
-
 		local function plasmaTeste (objeto)
-			local function onLocalCollision18( self, event )
-				if ( event.phase == "ended" and sinal9.numero==saida6.numero ) then
+			local function onLocalCollision( self, event )
+				if ( event.phase == "began") then
 					objeto:removeSelf()
-					pontos = pontos +10
-					sinal9:addEventListener("touch", bringToFront6)
-				else
-					objeto:removeSelf()
-					if teste == 0 then
-							vida1:removeSelf()
-							teste=teste+1
-					elseif (teste==1) then
-							vida2:removeSelf()
-							teste=teste+1
-					end
+
 				end
 			end
 
-			saida6.collision = onLocalCollision18
+			saidaLado.collision = onLocalCollision
+			saidaLado:addEventListener( "collision" )
+
+			saidaLado2.collision = onLocalCollision
+			saidaLado2:addEventListener( "collision" )
+
+			saidaLado3.collision = onLocalCollision
+			saidaLado3:addEventListener( "collision" )
+
+			saidaLado4.collision = onLocalCollision
+			saidaLado4:addEventListener( "collision" )
+
+			saidaLado5.collision = onLocalCollision
+			saidaLado5:addEventListener( "collision" )
+
+			saidaLado6.collision = onLocalCollision
+			saidaLado6:addEventListener( "collision" )
+
+			saida2.collision = onLocalCollision
+			saida2:addEventListener( "collision" )
+
+			saida3.collision = onLocalCollision
+			saida3:addEventListener( "collision" )
+
+			saida4.collision = onLocalCollision
+			saida4:addEventListener( "collision" )
+
+			saida5.collision = onLocalCollision
+			saida5:addEventListener( "collision" )
+
+			saida6.collision = onLocalCollision
 			saida6:addEventListener( "collision" )
 		end
 
@@ -547,7 +568,7 @@ function scene:create( event )
 				local function bringToFront4( event )
 					if ( event.phase == "began" ) then
 						sinal4:toFront()
-						sinal8:removeSelf()
+
 						sinal4:addEventListener( "touch", shootPlasma)
 						sinal4:addEventListener( "touch", bringToFront5 )
 					end
@@ -663,46 +684,7 @@ function scene:create( event )
 				end
 ----------------------------------------------------------------------------------	--------------------------------------
 
-				local function onLocalCollision8( self, event )
-					if ( event.phase == "ended" ) then
-						pontos = pontos + 10
-						sinal8: addEventListener( "touch", bringToFront7 )
-					end
-				end
 
-				local function onLocalCollision10( self, event )
-					if ( event.phase == "ended" ) then
-						pontos = pontos + 10
-						sinal10: addEventListener( "touch", bringToFront9 )
-					end
-				end
-
-				local function onLocalCollision11( self, event )
-					if ( event.phase == "ended" ) then
-						pontos = pontos + 10
-						sinal11: addEventListener( "touch", bringToFront10 )
-					end
-				end
-				local function onLocalCollision2( self, event )
-					if ( event.phase == "ended") then
-						if teste == 0 then
-							vida1:removeSelf()
-							teste=teste+1
-						elseif (teste==1) then
-							vida2:removeSelf()
-							teste=teste+1
-						end
-					end
-				end
-
-				saidaLado.collision = onLocalCollision11
-				saidaLado:addEventListener( "collision" )
-
-				saida6.collision = onLocalCollision10
-				saida6:addEventListener( "collision" )
-
-				saidaLado3.collision = onLocalCollision8
-				saidaLado3:addEventListener( "collision" )
 			end
         end
 		local function incrementaTexto (event)
