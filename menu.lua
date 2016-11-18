@@ -32,7 +32,7 @@ end
 function scene:create( event )
   local sceneGroup = self.view
 
-local background = display.newImage ("imagem/FirstScreen.png" , 490, 320)
+local background = display.newImage ("imagem/FirstScreen.png" , 479, 250	)
 
   -- create a widget button (which will loads game.lua on release)
   playBtn = widget.newButton{
@@ -41,16 +41,16 @@ local background = display.newImage ("imagem/FirstScreen.png" , 490, 320)
     onRelease = onPlayBtnRelease
   }
   playBtn.x = display.contentWidth*0.2
-  playBtn.y = display.contentHeight - 30
+  playBtn.y = display.contentHeight - 50
 
   -- create a widget button (which will loads recordes.lua on release)
   recBtn = widget.newButton{
     defaultFile="imagem/bt_recordes2.png",
-    width=350, height=190,
+    width=350, height=185,
     onRelease = onRecBtnRelease  -- event listener function
   }
   recBtn.x = display.contentWidth*0.8
-  recBtn.y = display.contentHeight - 30
+  recBtn.y = display.contentHeight - 50
 
       -- create a widget button (which will loads sobre.lua on release)
   sobreBtn = widget.newButton{
@@ -59,7 +59,7 @@ local background = display.newImage ("imagem/FirstScreen.png" , 490, 320)
     onRelease = onSobreBtnRelease  -- event listener function
   }
   sobreBtn.x = display.contentWidth*0.5
-  sobreBtn.y = display.contentHeight - 30
+  sobreBtn.y = display.contentHeight - 50
 
 
   sceneGroup:insert( background )

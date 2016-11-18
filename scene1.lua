@@ -275,13 +275,6 @@ function scene:create( event )
 
 		local function bringToFront10( event )
 		end
-
-		local function onLocalCollision( self, event )
-		end
-		local function bringToFront6(event)
-		end
-		local function bringToFront1( event )
-		end
 		local function bringToFront9( event )
 		end
 
@@ -368,11 +361,26 @@ function scene:create( event )
 			local function onLocalCollision( self, event )
 				if ( event.phase == "began") then
 					objeto:removeSelf()
-
+					pontos = pontos + 10
 				end
 			end
 
-			saidaLado.collision = onLocalCollision
+			local function onLocalCollision3( self, event )
+				if ( event.phase == "began") then
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					elseif (teste>1) then
+						vida3:removeSelf()
+					end
+				end
+			end
+
+
+			saidaLado.collision = onLocalCollision3
 			saidaLado:addEventListener( "collision" )
 
 			saidaLado2.collision = onLocalCollision
@@ -387,7 +395,7 @@ function scene:create( event )
 			saidaLado5.collision = onLocalCollision
 			saidaLado5:addEventListener( "collision" )
 
-			saidaLado6.collision = onLocalCollision
+			saidaLado6.collision = onLocalCollision3
 			saidaLado6:addEventListener( "collision" )
 
 			saida2.collision = onLocalCollision
@@ -396,7 +404,7 @@ function scene:create( event )
 			saida3.collision = onLocalCollision
 			saida3:addEventListener( "collision" )
 
-			saida4.collision = onLocalCollision
+			saida4.collision = onLocalCollision3
 			saida4:addEventListener( "collision" )
 
 			saida5.collision = onLocalCollision
@@ -548,7 +556,6 @@ function scene:create( event )
 				local function bringToFront3( event )
 					if ( event.phase == "began" ) then
 						sinal3:toFront()
-						sinal5:removeSelf()
 						sinal3:addEventListener( "touch", matheus)
 						sinal3:addEventListener( "touch", bringToFront10 )
 					end
@@ -558,7 +565,6 @@ function scene:create( event )
 				local function bringToFront5( event )
 					if ( event.phase == "began" ) then
 						sinal5:toFront()
-						sinal4:removeSelf()
 						sinal5:addEventListener( "touch", matheus)
 						sinal5:addEventListener( "touch", bringToFront3 )
 					end
@@ -568,8 +574,7 @@ function scene:create( event )
 				local function bringToFront4( event )
 					if ( event.phase == "began" ) then
 						sinal4:toFront()
-
-						sinal4:addEventListener( "touch", shootPlasma)
+						sinal4:addEventListener( "touch", matheus)
 						sinal4:addEventListener( "touch", bringToFront5 )
 					end
 					return true
@@ -578,7 +583,7 @@ function scene:create( event )
 				local function bringToFront8( event )
 					if ( event.phase == "began" ) then
 						sinal8:toFront()
-						sinal8:addEventListener( "touch", shootPlasma)
+						sinal8:addEventListener( "touch", matheus)
 						sinal8:addEventListener( "touch", bringToFront4 )
 					end
 					return true
@@ -587,7 +592,7 @@ function scene:create( event )
 				local function bringToFront2( event )
 					if ( event.phase == "began" ) then
 						sinal2:toFront()
-						sinal2:addEventListener( "touch", shootPlasma)
+						sinal2:addEventListener( "touch", matheus)
 						sinal2:addEventListener( "touch", bringToFront8 )
 					end
 					return true
@@ -596,7 +601,7 @@ function scene:create( event )
 				local function bringToFront7( event )
 					if ( event.phase == "began" ) then
 						sinal7:toFront()
-						sinal7:addEventListener( "touch", shootPlasma)
+						sinal7:addEventListener( "touch", matheus)
 						sinal7:addEventListener( "touch", bringToFront2 )
 					end
 					return true
@@ -615,19 +620,21 @@ function scene:create( event )
 					if ( event.phase == "began" ) then
 						sinal6:toFront()
 						sinal6:addEventListener( "touch", matheus)
+						sinal6:addEventListener ("touch" , bringToFront1 )
 					end
 					return true
 				end
 
-				local function bringToFront9( event )
+				function bringToFront9( event )
 					if ( event.phase == "began" ) then
 						sinal9:toFront()
 						sinal9:addEventListener( "touch", matheus)
+						sinal9:addEventListener ("touch" , bringToFront6 )
 					end
 					return true
 				end
 
-				local function bringToFront10( event )
+				function bringToFront10( event )
 					if ( event.phase == "began") then
 						sinal10:toFront()
 						sinal10:addEventListener ("touch", matheus)
@@ -683,7 +690,59 @@ function scene:create( event )
 					sinal1:addEventListener("touch", bringToFront1)
 				end
 ----------------------------------------------------------------------------------	--------------------------------------
+			local function onLocalCollision( self, event )
+				if ( event.phase == "began") then
+					plasma:removeSelf()
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste=teste+1
+					end
+				end
+			end
 
+			local function onLocalCollision2( self, event )
+				if ( event.phase == "began") then
+					plasma:removeSelf()
+					pontos = pontos + 10
+					sinal11:addEventListener ("touch", bringToFront10 )
+				end
+			end
+
+			saidaLado.collision = onLocalCollision
+			saidaLado:addEventListener( "collision" )
+
+			saidaLado2.collision = onLocalCollision
+			saidaLado2:addEventListener( "collision" )
+
+			saidaLado3.collision = onLocalCollision
+			saidaLado3:addEventListener( "collision" )
+
+			saidaLado4.collision = onLocalCollision
+			saidaLado4:addEventListener( "collision" )
+
+			saidaLado5.collision = onLocalCollision
+			saidaLado5:addEventListener( "collision" )
+
+			saidaLado6.collision = onLocalCollision
+			saidaLado6:addEventListener( "collision" )
+
+			saida2.collision = onLocalCollision
+			saida2:addEventListener( "collision" )
+
+			saida3.collision = onLocalCollision
+			saida3:addEventListener( "collision" )
+
+			saida4.collision = onLocalCollision
+			saida4:addEventListener( "collision" )
+
+			saida5.collision = onLocalCollision
+			saida5:addEventListener( "collision" )
+
+			saida6.collision = onLocalCollision
+			saida6:addEventListener( "collision" )
 
 			end
         end
