@@ -39,6 +39,21 @@ local cores = 11
 local teste = 0
 local scores = display.newText( "0",830, 660, native.systemFontBold, 50 )
 scores:setFillColor( 100, 100, 100 )
+
+local function contaVidas()
+	if teste == 0 then
+		vida1:removeSelf()
+		teste= teste +1
+		return
+	elseif (teste==1) then
+		vida2:removeSelf()
+		teste = teste+1
+		return
+	elseif (teste==2) then
+		vida3:removeSelf()
+		teste = teste+1
+	end
+end
 ------------------------------------------------------------------------------------------------------------------------
 --criar paredes e limites na tela
 local paredeEsquerda = display.newRect(0, 370, 0, display.contentHeight)
@@ -369,13 +384,7 @@ function scene:create( event )
 					objeto:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -384,13 +393,7 @@ function scene:create( event )
 					objeto:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -399,13 +402,7 @@ function scene:create( event )
 					objeto:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -414,13 +411,7 @@ function scene:create( event )
 					objeto:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -429,13 +420,7 @@ function scene:create( event )
 					objeto:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -444,13 +429,7 @@ function scene:create( event )
 					objeto:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -459,13 +438,7 @@ function scene:create( event )
 					objeto:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -474,13 +447,7 @@ function scene:create( event )
 					objeto:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -489,13 +456,7 @@ function scene:create( event )
 					objeto:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -504,13 +465,7 @@ function scene:create( event )
 					objeto:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -519,13 +474,7 @@ function scene:create( event )
 					objeto:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -854,13 +803,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -869,13 +812,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -884,13 +821,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -899,13 +830,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -914,13 +839,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -929,13 +848,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -944,13 +857,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -959,13 +866,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -974,13 +875,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -989,13 +884,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -1004,13 +893,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
-					if teste == 0 then
-						vida1:removeSelf()
-						teste=teste+1
-					elseif (teste==1) then
-						vida2:removeSelf()
-						teste = teste+1
-					end
+					contaVidas()
 				end
 			end
 
@@ -1068,10 +951,41 @@ function scene:create( event )
 	start:addEventListener( "touch", shootPlasma)
 
 end
+
+function scene:show( event )
+  local sceneGroup = self.view
+  local phase = event.phase
+
+  if phase == "will" then
+
+  elseif phase == "did" then
+
+  end
+end
+
+function scene:hide( event )
+  local sceneGroup = self.view
+  local phase = event.phase
+
+  if event.phase == "will" then
+
+  elseif phase == "did" then
+
+  end
+end
+
+function scene:destroy( event )
+  local sceneGroup = self.view
+
+end
+
 ---------------------------------------------------------------------------
 
 -- Listener setup
 scene:addEventListener( "create", scene )
+scene:addEventListener( "show", scene )
+scene:addEventListener( "hide", scene )
+scene:addEventListener( "destroy", scene )
 
 ---------------------------------------------------------------------------------
 

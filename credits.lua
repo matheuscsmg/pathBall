@@ -13,11 +13,11 @@ physics.setGravity(0, 9.8)
 
 
 system.activate("multitouch")
-local sceneName2 = ...
+local sceneName = ...
 
 local composer = require( "composer" )
 
-local scene = composer.newScene( sceneName2 )
+local scene = composer.newScene( sceneName )
 
 
 local playBtn
@@ -41,7 +41,7 @@ function scene:create( event )
 
   -- create a widget button (which will loads game.lua on release)
 	playBtn = widget.newButton{
-		defaultFile="imagem/bt_play2.png",
+		defaultFile="imagem/backA.png",
 		width=350, height=190,
 		onRelease = onPlayBtnRelease
 	}
