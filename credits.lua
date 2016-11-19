@@ -36,17 +36,17 @@ end
 function scene:create( event )
 
     local sceneGroup = self.view
-	local background = display.newImage ("imagem/parede3.png" , 250 , 370)
+	local background = display.newImage ("imagem/parede3.png" , 475 , 359)
 
 
   -- create a widget button (which will loads game.lua on release)
 	playBtn = widget.newButton{
-		defaultFile="imagem/backA.png",
-		width=350, height=190,
+		defaultFile="imagem/backV.png",
+		width=270, height=120,
 		onRelease = onPlayBtnRelease
 	}
-	playBtn.x = display.contentWidth*0.8
-	playBtn.y = display.contentHeight - 50
+	playBtn.x = display.contentWidth*0.87
+	playBtn.y = display.contentHeight - 45
 
   sceneGroup:insert( background )
   sceneGroup:insert( playBtn )

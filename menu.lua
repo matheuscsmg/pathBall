@@ -11,7 +11,7 @@ local scene = composer.newScene()
 
 local widget = require "widget"
 
-local backgroundMusic = audio.loadStream("sounds/Bounce_Ball.mp3")
+--local backgroundMusic = audio.loadStream("sounds/Bounce_Ball.mp3")
 
 local backgroundMusicChannel = audio.play( backgroundMusic, { channel=1, loops=-1, fadein=5000 } )
 
@@ -55,38 +55,39 @@ end
 
 function scene:create( event )
   local sceneGroup = self.view
-  local background = display.newImage ("imagem/images.jpg" , 450 , 390)
-  local background2 = display.newImage ("imagem/FirstScreen.png" , 479, 250	)
+  local background = display.newImage ("imagem/images.png" , 450 , 390)
+  local background2 = display.newImage ("imagem/FirstScreen.png" , 479, 300	)
 
   -- create a widget button (which will loads game.lua on release)
   playBtn = widget.newButton{
     defaultFile="imagem/bt_play2.png",
-    width=350, height=190,
+    width=300, height=150,
     onRelease = onPlayBtnRelease
   }
   playBtn.x = display.contentWidth*0.2
-  playBtn.y = display.contentHeight - 50
+  playBtn.y = display.contentHeight - 70
 
   -- create a widget button (which will loads recordes.lua on release)
   recBtn = widget.newButton{
     defaultFile="imagem/bt_recordes2.png",
-    width=350, height=185,
+    width=300, height=150,
     onRelease = onRecBtnRelease  -- event listener function
   }
   recBtn.x = display.contentWidth*0.8
-  recBtn.y = display.contentHeight - 50
+  recBtn.y = display.contentHeight - 70
 
       -- create a widget button (which will loads sobre.lua on release)
   sobreBtn = widget.newButton{
     defaultFile="imagem/bt_sobre2.png",
-    width=350, height=190,
+    width=300, height=150,
     onRelease = onSobreBtnRelease  -- event listener function
   }
   sobreBtn.x = display.contentWidth*0.5
-  sobreBtn.y = display.contentHeight - 50
+  sobreBtn.y = display.contentHeight - 70
 
 
   sceneGroup:insert( background )
+  sceneGroup:insert( background2 )
   sceneGroup:insert( sobreBtn )
   sceneGroup:insert( playBtn )
   sceneGroup:insert( recBtn )

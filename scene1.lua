@@ -17,7 +17,7 @@ local sceneName = ...
 
 local composer = require( "composer" )
 
-local background = display.newImage ("imagem/parede.png" , 250 , 370)
+local background = display.newImage ("imagem/images.png" , 450 , 390)
 --------------------------------------------------------------------------------
 local vida1 = display.newImage("imagem/vida.png")
 vida1.x = display.contentWidth/23
@@ -44,14 +44,16 @@ local function contaVidas()
 	if teste == 0 then
 		vida1:removeSelf()
 		teste= teste +1
-		return
 	elseif (teste==1) then
 		vida2:removeSelf()
 		teste = teste+1
-		return
 	elseif (teste==2) then
 		vida3:removeSelf()
 		teste = teste+1
+	elseif (teste>2) then
+		composer.gotoScene( "gameOver" )
+		local background = display.newImage ("imagem/gameOver.png" , 475 , 359)
+
 	end
 end
 ------------------------------------------------------------------------------------------------------------------------
@@ -273,6 +275,7 @@ mover3(saidaLado,saidaLado2,saidaLado3)
 --------------------------------------------------------------------------------
 
 local scene = composer.newScene( sceneName )
+local pontos = 0
 
 
 --local backgroundMusic = audio.loadStream("sounds/jogo.mp3")
@@ -299,7 +302,6 @@ function scene:create( event )
 			cores = objeto1
 		end
 
-		local pontos = 0
 
 				local sinal1 = display.newImage("imagem/circuloLilaz.png")
 				sinal1.x = display.contentWidth/2
@@ -382,8 +384,9 @@ function scene:create( event )
 			local function onLocalCollision( self, event )
 				if ( event.phase == "began" and cores == 11) then
 					objeto:removeSelf()
-					pontos = pontos + 10
+
 				else
+					objeto:removeSelf()
 					contaVidas()
 				end
 			end
@@ -391,8 +394,8 @@ function scene:create( event )
 			local function onLocalCollision2( self, event )
 				if ( event.phase == "began" and cores == 1) then
 					objeto:removeSelf()
-					pontos = pontos + 10
 				else
+					objeto:removeSelf()
 					contaVidas()
 				end
 			end
@@ -400,8 +403,9 @@ function scene:create( event )
 			local function onLocalCollision3( self, event )
 				if ( event.phase == "began" and cores == 8) then
 					objeto:removeSelf()
-					pontos = pontos + 10
+
 				else
+					objeto:removeSelf()
 					contaVidas()
 				end
 			end
@@ -409,8 +413,9 @@ function scene:create( event )
 			local function onLocalCollision4( self, event )
 				if ( event.phase == "began" and cores == 7) then
 					objeto:removeSelf()
-					pontos = pontos + 10
+
 				else
+					objeto:removeSelf()
 					contaVidas()
 				end
 			end
@@ -418,8 +423,9 @@ function scene:create( event )
 			local function onLocalCollision5( self, event )
 				if ( event.phase == "began" and cores == 6) then
 					objeto:removeSelf()
-					pontos = pontos + 10
+
 				else
+					objeto:removeSelf()
 					contaVidas()
 				end
 			end
@@ -429,6 +435,7 @@ function scene:create( event )
 					objeto:removeSelf()
 					pontos = pontos + 10
 				else
+					objeto:removeSelf()
 					contaVidas()
 				end
 			end
@@ -438,6 +445,7 @@ function scene:create( event )
 					objeto:removeSelf()
 					pontos = pontos + 10
 				else
+					objeto:removeSelf()
 					contaVidas()
 				end
 			end
@@ -447,6 +455,7 @@ function scene:create( event )
 					objeto:removeSelf()
 					pontos = pontos + 10
 				else
+					objeto:removeSelf()
 					contaVidas()
 				end
 			end
@@ -456,6 +465,7 @@ function scene:create( event )
 					objeto:removeSelf()
 					pontos = pontos + 10
 				else
+					objeto:removeSelf()
 					contaVidas()
 				end
 			end
@@ -465,6 +475,7 @@ function scene:create( event )
 					objeto:removeSelf()
 					pontos = pontos + 10
 				else
+					objeto:removeSelf()
 					contaVidas()
 				end
 			end
@@ -473,7 +484,9 @@ function scene:create( event )
 				if ( event.phase == "began" and cores == 10) then
 					objeto:removeSelf()
 					pontos = pontos + 10
+
 				else
+					objeto:removeSelf()
 					contaVidas()
 				end
 			end
@@ -803,6 +816,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
+					plasma:removeSelf()
 					contaVidas()
 				end
 			end
@@ -812,6 +826,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
+					plasma:removeSelf()
 					contaVidas()
 				end
 			end
@@ -821,6 +836,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
+					plasma:removeSelf()
 					contaVidas()
 				end
 			end
@@ -830,6 +846,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
+					plasma:removeSelf()
 					contaVidas()
 				end
 			end
@@ -839,6 +856,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
+					plasma:removeSelf()
 					contaVidas()
 				end
 			end
@@ -848,6 +866,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
+					plasma:removeSelf()
 					contaVidas()
 				end
 			end
@@ -857,6 +876,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
+					plasma:removeSelf()
 					contaVidas()
 				end
 			end
@@ -866,6 +886,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
+					plasma:removeSelf()
 					contaVidas()
 				end
 			end
@@ -875,6 +896,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
+					plasma:removeSelf()
 					contaVidas()
 				end
 			end
@@ -884,6 +906,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
+					plasma:removeSelf()
 					contaVidas()
 				end
 			end
@@ -893,6 +916,7 @@ function scene:create( event )
 					plasma:removeSelf()
 					pontos = pontos + 10
 				else
+					plasma:removeSelf()
 					contaVidas()
 				end
 			end
