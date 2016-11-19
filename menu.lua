@@ -1,3 +1,4 @@
+
 -----------------------------------------------------------------------------------------
 --
 -- game.lua
@@ -10,12 +11,11 @@ local scene = composer.newScene()
 
 local widget = require "widget"
 
---local backgroundMusic = audio.loadStream("sounds/Bounce_Ball.mp3")
+local backgroundMusic = audio.loadStream("sounds/Bounce_Ball.mp3")
 
---local backgroundMusicChannel = audio.play( backgroundMusic, { channel=1, loops=-1, fadein=5000 } )
+local backgroundMusicChannel = audio.play( backgroundMusic, { channel=1, loops=-1, fadein=5000 } )
 
 --------------------------------------------
-
 
 local playBtn
 
@@ -29,10 +29,34 @@ local function onPlayBtnRelease()
 end
 
 
+local sobreBtn
+local function onSobreBtnRelease()
+
+  -- go to game.lua scene [ joguim rodando]
+  composer.gotoScene( "instructions", "fade", 100 )
+  composer.removeHidden()
+
+  return true
+end
+
+
+local recBtn
+local function onRecBtnRelease()
+  -- go to game.lua scene [ joguim rodando]
+  composer.gotoScene( "credits", "fade", 100 )
+  composer.removeHidden()
+
+  return true
+end
+
+
+
+
+
 function scene:create( event )
   local sceneGroup = self.view
-
-local background = display.newImage ("imagem/FirstScreen.png" , 479, 250	)
+  local background = display.newImage ("imagem/images.jpg" , 450 , 390)
+  local background2 = display.newImage ("imagem/FirstScreen.png" , 479, 250	)
 
   -- create a widget button (which will loads game.lua on release)
   playBtn = widget.newButton{
@@ -105,6 +129,11 @@ function scene:destroy( event )
     credBtn:removeSelf()  -- widgets must be manually removed
     credBtn = nil
   end
+
+  if recBtn then
+	recBtn:removeSelf()
+	recBtn = nil
+   end
 end
 
 ---------------------------------------------------------------------------------

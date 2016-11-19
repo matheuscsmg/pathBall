@@ -34,10 +34,12 @@ vida3.x = display.contentWidth/5.7
 vida3.y = display.contentHeight/1.1
 physics.addBody(vida3, "static", {bounce = 0.1,radius=15,friction = 1.0})
 
+----------------------------------------------------------------------------------------------------------------------------
+local cores = 11
 local teste = 0
 local scores = display.newText( "0",830, 660, native.systemFontBold, 50 )
 scores:setFillColor( 100, 100, 100 )
-
+------------------------------------------------------------------------------------------------------------------------
 --criar paredes e limites na tela
 local paredeEsquerda = display.newRect(0, 370, 0, display.contentHeight)
 local paredeDireita = display.newRect(display.contentWidth,350,0,display.contentHeight)
@@ -278,6 +280,12 @@ function scene:create( event )
 		local function bringToFront9( event )
 		end
 
+		local function trocarCores (objeto1)
+			cores = objeto1
+		end
+
+		local pontos = 0
+
 				local sinal1 = display.newImage("imagem/circuloLilaz.png")
 				sinal1.x = display.contentWidth/2
 				sinal1.y = display.contentHeight/1.1
@@ -355,62 +363,203 @@ function scene:create( event )
 				sinal11.myname="laranja"
 				sinal11.numero=11
 
-		local pontos = 0
-
 		local function plasmaTeste (objeto)
 			local function onLocalCollision( self, event )
-				if ( event.phase == "began") then
+				if ( event.phase == "began" and cores == 11) then
 					objeto:removeSelf()
 					pontos = pontos + 10
-				end
-			end
-
-			local function onLocalCollision3( self, event )
-				if ( event.phase == "began") then
+				else
 					if teste == 0 then
 						vida1:removeSelf()
 						teste=teste+1
 					elseif (teste==1) then
 						vida2:removeSelf()
 						teste = teste+1
-					elseif (teste>1) then
-						vida3:removeSelf()
 					end
 				end
 			end
 
+			local function onLocalCollision2( self, event )
+				if ( event.phase == "began" and cores == 1) then
+					objeto:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
 
-			saidaLado.collision = onLocalCollision3
+			local function onLocalCollision3( self, event )
+				if ( event.phase == "began" and cores == 8) then
+					objeto:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
+
+			local function onLocalCollision4( self, event )
+				if ( event.phase == "began" and cores == 7) then
+					objeto:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
+
+			local function onLocalCollision5( self, event )
+				if ( event.phase == "began" and cores == 6) then
+					objeto:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
+
+			local function onLocalCollision6( self, event )
+				if ( event.phase == "began" and cores == 9) then
+					objeto:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
+
+			local function onLocalCollision7( self, event )
+				if ( event.phase == "began" and cores == 2) then
+					objeto:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
+
+			local function onLocalCollision8( self, event )
+				if ( event.phase == "began" and cores == 4) then
+					objeto:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
+
+			local function onLocalCollision9( self, event )
+				if ( event.phase == "began" and cores == 5) then
+					objeto:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
+
+			local function onLocalCollision10( self, event )
+				if ( event.phase == "began" and cores == 3) then
+					objeto:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
+
+			local function onLocalCollision11( self, event )
+				if ( event.phase == "began" and cores == 10) then
+					objeto:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
+
+			saidaLado.collision = onLocalCollision
 			saidaLado:addEventListener( "collision" )
 
-			saidaLado2.collision = onLocalCollision
+			saidaLado2.collision = onLocalCollision2
 			saidaLado2:addEventListener( "collision" )
 
-			saidaLado3.collision = onLocalCollision
+			saidaLado3.collision = onLocalCollision3
 			saidaLado3:addEventListener( "collision" )
 
-			saidaLado4.collision = onLocalCollision
+			saidaLado4.collision = onLocalCollision4
 			saidaLado4:addEventListener( "collision" )
 
-			saidaLado5.collision = onLocalCollision
+			saidaLado5.collision = onLocalCollision5
 			saidaLado5:addEventListener( "collision" )
 
-			saidaLado6.collision = onLocalCollision3
+			saidaLado6.collision = onLocalCollision6
 			saidaLado6:addEventListener( "collision" )
 
-			saida2.collision = onLocalCollision
+			saida2.collision = onLocalCollision7
 			saida2:addEventListener( "collision" )
 
-			saida3.collision = onLocalCollision
+			saida3.collision = onLocalCollision8
 			saida3:addEventListener( "collision" )
 
-			saida4.collision = onLocalCollision3
+			saida4.collision = onLocalCollision9
 			saida4:addEventListener( "collision" )
 
-			saida5.collision = onLocalCollision
+			saida5.collision = onLocalCollision10
 			saida5:addEventListener( "collision" )
 
-			saida6.collision = onLocalCollision
+			saida6.collision = onLocalCollision11
 			saida6:addEventListener( "collision" )
 		end
 
@@ -556,6 +705,7 @@ function scene:create( event )
 				local function bringToFront3( event )
 					if ( event.phase == "began" ) then
 						sinal3:toFront()
+						trocarCores (3)
 						sinal3:addEventListener( "touch", matheus)
 						sinal3:addEventListener( "touch", bringToFront10 )
 					end
@@ -565,6 +715,7 @@ function scene:create( event )
 				local function bringToFront5( event )
 					if ( event.phase == "began" ) then
 						sinal5:toFront()
+						trocarCores (5)
 						sinal5:addEventListener( "touch", matheus)
 						sinal5:addEventListener( "touch", bringToFront3 )
 					end
@@ -574,6 +725,7 @@ function scene:create( event )
 				local function bringToFront4( event )
 					if ( event.phase == "began" ) then
 						sinal4:toFront()
+						trocarCores (4)
 						sinal4:addEventListener( "touch", matheus)
 						sinal4:addEventListener( "touch", bringToFront5 )
 					end
@@ -583,6 +735,7 @@ function scene:create( event )
 				local function bringToFront8( event )
 					if ( event.phase == "began" ) then
 						sinal8:toFront()
+						trocarCores (8)
 						sinal8:addEventListener( "touch", matheus)
 						sinal8:addEventListener( "touch", bringToFront4 )
 					end
@@ -592,6 +745,7 @@ function scene:create( event )
 				local function bringToFront2( event )
 					if ( event.phase == "began" ) then
 						sinal2:toFront()
+						trocarCores (2)
 						sinal2:addEventListener( "touch", matheus)
 						sinal2:addEventListener( "touch", bringToFront8 )
 					end
@@ -601,6 +755,7 @@ function scene:create( event )
 				local function bringToFront7( event )
 					if ( event.phase == "began" ) then
 						sinal7:toFront()
+						trocarCores (7)
 						sinal7:addEventListener( "touch", matheus)
 						sinal7:addEventListener( "touch", bringToFront2 )
 					end
@@ -610,6 +765,7 @@ function scene:create( event )
 				local function bringToFront1( event )
 					if ( event.phase == "began" ) then
 						sinal1:toFront()
+						trocarCores (1)
 						sinal1:addEventListener( "touch", matheus)
 						sinal1:addEventListener( "touch", bringToFront7 )
 					end
@@ -619,6 +775,7 @@ function scene:create( event )
 				local function bringToFront6( event )
 					if ( event.phase == "began" ) then
 						sinal6:toFront()
+						trocarCores (6)
 						sinal6:addEventListener( "touch", matheus)
 						sinal6:addEventListener ("touch" , bringToFront1 )
 					end
@@ -628,6 +785,7 @@ function scene:create( event )
 				function bringToFront9( event )
 					if ( event.phase == "began" ) then
 						sinal9:toFront()
+						trocarCores (9)
 						sinal9:addEventListener( "touch", matheus)
 						sinal9:addEventListener ("touch" , bringToFront6 )
 					end
@@ -637,6 +795,7 @@ function scene:create( event )
 				function bringToFront10( event )
 					if ( event.phase == "began") then
 						sinal10:toFront()
+						trocarCores (10)
 						sinal10:addEventListener ("touch", matheus)
 						sinal10:addEventListener( "touch", bringToFront9)
 					end
@@ -691,57 +850,201 @@ function scene:create( event )
 				end
 ----------------------------------------------------------------------------------	--------------------------------------
 			local function onLocalCollision( self, event )
-				if ( event.phase == "began") then
+				if ( event.phase == "began" and cores == 11) then
 					plasma:removeSelf()
+					pontos = pontos + 10
+				else
 					if teste == 0 then
 						vida1:removeSelf()
 						teste=teste+1
 					elseif (teste==1) then
 						vida2:removeSelf()
-						teste=teste+1
+						teste = teste+1
 					end
 				end
 			end
 
 			local function onLocalCollision2( self, event )
-				if ( event.phase == "began") then
+				if ( event.phase == "began" and cores == 1) then
 					plasma:removeSelf()
 					pontos = pontos + 10
-					sinal11:addEventListener ("touch", bringToFront10 )
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
+
+			local function onLocalCollision3( self, event )
+				if ( event.phase == "began" and cores == 8) then
+					plasma:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
+
+			local function onLocalCollision4( self, event )
+				if ( event.phase == "began" and cores == 7) then
+					plasma:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
+
+			local function onLocalCollision5( self, event )
+				if ( event.phase == "began" and cores == 6) then
+					plasma:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
+
+			local function onLocalCollision6( self, event )
+				if ( event.phase == "began" and cores == 9) then
+					plasma:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
+
+			local function onLocalCollision7( self, event )
+				if ( event.phase == "began" and cores == 2) then
+					plasma:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
+
+			local function onLocalCollision8( self, event )
+				if ( event.phase == "began" and cores == 4) then
+					plasma:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
+
+			local function onLocalCollision9( self, event )
+				if ( event.phase == "began" and cores == 5) then
+					plasma:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
+
+			local function onLocalCollision10( self, event )
+				if ( event.phase == "began" and cores == 3) then
+					plasma:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
+				end
+			end
+
+			local function onLocalCollision11( self, event )
+				if ( event.phase == "began" and cores == 10) then
+					plasma:removeSelf()
+					pontos = pontos + 10
+				else
+					if teste == 0 then
+						vida1:removeSelf()
+						teste=teste+1
+					elseif (teste==1) then
+						vida2:removeSelf()
+						teste = teste+1
+					end
 				end
 			end
 
 			saidaLado.collision = onLocalCollision
 			saidaLado:addEventListener( "collision" )
 
-			saidaLado2.collision = onLocalCollision
+			saidaLado2.collision = onLocalCollision2
 			saidaLado2:addEventListener( "collision" )
 
-			saidaLado3.collision = onLocalCollision
+			saidaLado3.collision = onLocalCollision3
 			saidaLado3:addEventListener( "collision" )
 
-			saidaLado4.collision = onLocalCollision
+			saidaLado4.collision = onLocalCollision4
 			saidaLado4:addEventListener( "collision" )
 
-			saidaLado5.collision = onLocalCollision
+			saidaLado5.collision = onLocalCollision5
 			saidaLado5:addEventListener( "collision" )
 
-			saidaLado6.collision = onLocalCollision
+			saidaLado6.collision = onLocalCollision6
 			saidaLado6:addEventListener( "collision" )
 
-			saida2.collision = onLocalCollision
+			saida2.collision = onLocalCollision7
 			saida2:addEventListener( "collision" )
 
-			saida3.collision = onLocalCollision
+			saida3.collision = onLocalCollision8
 			saida3:addEventListener( "collision" )
 
-			saida4.collision = onLocalCollision
+			saida4.collision = onLocalCollision9
 			saida4:addEventListener( "collision" )
 
-			saida5.collision = onLocalCollision
+			saida5.collision = onLocalCollision10
 			saida5:addEventListener( "collision" )
 
-			saida6.collision = onLocalCollision
+			saida6.collision = onLocalCollision11
 			saida6:addEventListener( "collision" )
 
 			end
