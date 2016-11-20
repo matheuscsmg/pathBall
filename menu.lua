@@ -11,7 +11,7 @@ local scene = composer.newScene()
 
 local widget = require "widget"
 
---local backgroundMusic = audio.loadStream("sounds/Bounce_Ball.mp3")
+local backgroundMusic = audio.loadStream("sounds/Bounce_Ball.mp3")
 
 local backgroundMusicChannel = audio.play( backgroundMusic, { channel=1, loops=-1, fadein=5000 } )
 
@@ -22,6 +22,7 @@ local playBtn
 local function onPlayBtnRelease()
 
   -- go to game.lua scene [ joguim rodando]
+  audio.stop()
   composer.gotoScene( "scene1", "fade", 100 )
   composer.removeHidden()
 

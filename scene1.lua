@@ -11,6 +11,8 @@ physics.start()
 physics.setGravity(0, 9.8)
 --physics.setDrawMode("hybrid")
 
+local backgroundMusic = audio.loadStream("sounds/Pilots_Of_Stone.mp3")
+local backgroundMusicChannel = audio.play( backgroundMusic, { channel=1, loops=-1, fadein=5000 } )
 
 system.activate("multitouch")
 local sceneName = ...
@@ -35,6 +37,19 @@ vida3.y = display.contentHeight/1.1
 physics.addBody(vida3, "static", {bounce = 0.1,radius=15,friction = 1.0})
 
 ----------------------------------------------------------------------------------------------------------------------------
+local sinal1
+local sinal2
+local sinal3
+local sinal4
+local sinal5
+local sinal6
+local sinal7
+local sinal8
+local sinal9
+local sinal10
+local sinal11
+local start
+
 local cores = 11
 local teste = 0
 local scores = display.newText( "0",830, 660, native.systemFontBold, 50 )
@@ -43,7 +58,7 @@ scores:setFillColor( 100, 100, 100 )
 local function contaVidas()
 	if teste == 0 then
 		vida1:removeSelf()
-		teste= teste +1
+		teste = teste +1
 	elseif (teste==1) then
 		vida2:removeSelf()
 		teste = teste+1
@@ -51,11 +66,10 @@ local function contaVidas()
 		vida3:removeSelf()
 		teste = teste+1
 	elseif (teste>2) then
-		composer.gotoScene( "gameOver" )
-		local background = display.newImage ("imagem/gameOver.png" , 475 , 359)
-
+		composer.gotoScene ("gameOver", "fade", 100 )
 	end
 end
+
 ------------------------------------------------------------------------------------------------------------------------
 --criar paredes e limites na tela
 local paredeEsquerda = display.newRect(0, 370, 0, display.contentHeight)
@@ -270,8 +284,6 @@ end
 mover2(saidaLado4,saidaLado5,saidaLado6)
 mover3(saidaLado,saidaLado2,saidaLado3)
 
-
-
 --------------------------------------------------------------------------------
 
 local scene = composer.newScene( sceneName )
@@ -303,77 +315,77 @@ function scene:create( event )
 		end
 
 
-				local sinal1 = display.newImage("imagem/circuloLilaz.png")
+				sinal1 = display.newImage("imagem/circuloLilaz.png")
 				sinal1.x = display.contentWidth/2
 				sinal1.y = display.contentHeight/1.1
 				physics.addBody(sinal1, "static", {bounce = 0.1,friction = 1.0})
 				sinal1.myname="lilaz"
 				sinal1.numero=1
 
-				local sinal2 = display.newImage("imagem/circuloAzul.png")
+				sinal2 = display.newImage("imagem/circuloAzul.png")
 				sinal2.x = display.contentWidth/2
 				sinal2.y = display.contentHeight/1.1
 				physics.addBody(sinal2, "static", {bounce = 0.1,friction = 1.0})
 				sinal2.myname="azul"
 				sinal2.numero=2
 
-				local sinal3 = display.newImage("imagem/circuloAmarelo.png")
+				sinal3 = display.newImage("imagem/circuloAmarelo.png")
 				sinal3.x = display.contentWidth/2
 				sinal3.y = display.contentHeight/1.1
 				physics.addBody(sinal3, "static", {bounce = 0.1,friction = 1.0})
 				sinal3.myname="amarelo"
 				sinal3.numero=3
 
-				local sinal4 = display.newImage("imagem/circuloVerde.png")
+				sinal4 = display.newImage("imagem/circuloVerde.png")
 				sinal4.x = display.contentWidth/2
 				sinal4.y = display.contentHeight/1.1
 				physics.addBody(sinal4, "static", {bounce = 0.1,friction = 1.0})
 				sinal4.myname="verde"
 				sinal4.numero=4
 
-				local sinal5 = display.newImage("imagem/circuloVermelho.png")
+				sinal5 = display.newImage("imagem/circuloVermelho.png")
 				sinal5.x = display.contentWidth/2
 				sinal5.y = display.contentHeight/1.1
 				physics.addBody(sinal5, "static", {bounce = 0.1,friction = 1.0})
 				sinal5.myname="vermelho"
 				sinal5.numero=5
 
-				local sinal6 = display.newImage("imagem/circuloMarfin.png")
+				sinal6 = display.newImage("imagem/circuloMarfin.png")
 				sinal6.x = display.contentWidth/2
 				sinal6.y = display.contentHeight/1.1
 				physics.addBody(sinal6, "static", {bounce = 0.1,friction = 1.0})
 				sinal6.myname="marfin"
 				sinal6.numero=6
 
-				local sinal7 = display.newImage("imagem/circuloMarron.png")
+				sinal7 = display.newImage("imagem/circuloMarron.png")
 				sinal7.x = display.contentWidth/2
 				sinal7.y = display.contentHeight/1.1
 				physics.addBody(sinal7, "static", {bounce = 0.1,friction = 1.0})
 				sinal7.myname="marron"
 				sinal7.numero=7
 
-				local sinal8 = display.newImage("imagem/circuloRosa.png")
+				sinal8 = display.newImage("imagem/circuloRosa.png")
 				sinal8.x = display.contentWidth/2
 				sinal8.y = display.contentHeight/1.1
 				physics.addBody(sinal8, "static", {bounce = 0.1,friction = 1.0})
 				sinal8.myname="rosa"
 				sinal8.numero = 8
 
-				local sinal9 = display.newImage("imagem/circuloGraviola.png")
+				sinal9 = display.newImage("imagem/circuloGraviola.png")
 				sinal9.x = display.contentWidth/2
 				sinal9.y = display.contentHeight/1.1
 				physics.addBody(sinal9, "static", {bounce = 0.1,friction = 1.0})
 				sinal9.myname="graviola"
 				sinal9.numero= 9
 
-				local sinal10 = display.newImage("imagem/circuloCinza.png")
+				sinal10 = display.newImage("imagem/circuloCinza.png")
 				sinal10.x = display.contentWidth/2
 				sinal10.y = display.contentHeight/1.1
 				physics.addBody(sinal10, "static", {bounce = 0.1,friction = 1.0})
 				sinal10.myname="cinza"
 				sinal10.numero=10
 
-				local sinal11 = display.newImage("imagem/circuloLaranja.png")
+				sinal11 = display.newImage("imagem/circuloLaranja.png")
 				sinal11.x = display.contentWidth/2
 				sinal11.y = display.contentHeight/1.1
 				physics.addBody(sinal11, "static", {bounce = 0.1,friction = 1.0})
@@ -381,6 +393,7 @@ function scene:create( event )
 				sinal11.numero=11
 
 		local function plasmaTeste (objeto)
+
 			local function onLocalCollision( self, event )
 				if ( event.phase == "began" and cores == 11) then
 					objeto:removeSelf()
@@ -775,7 +788,6 @@ function scene:create( event )
 				end
 
 				if (teste1==2) then
-					sinal9:addEventListener( "touch", matheus)
 					sinal9:addEventListener("touch", bringToFront9)
 				end
 
@@ -965,7 +977,7 @@ function scene:create( event )
 
     end
 
-	local start = display.newImage("imagem/start.png")
+	start = display.newImage("imagem/start.png")
 	start.x = display.contentWidth/2
 	start.y = display.contentHeight/1.1
 	physics.addBody(start, "static", {bounce = 0.1,friction = 1.0})
@@ -992,6 +1004,32 @@ function scene:hide( event )
   local phase = event.phase
 
   if event.phase == "will" then
+	audio.stop()
+	background:removeSelf()
+	saidaLado:removeSelf()
+	saidaLado2:removeSelf()
+	saidaLado3:removeSelf()
+	saidaLado4:removeSelf()
+	saidaLado5:removeSelf()
+	saidaLado6:removeSelf()
+	saida2:removeSelf()
+	saida3:removeSelf()
+	saida4:removeSelf()
+	saida5:removeSelf()
+	saida6:removeSelf()
+	sinal1:removeSelf()
+	sinal2:removeSelf()
+	sinal3:removeSelf()
+	sinal4:removeSelf()
+	sinal5:removeSelf()
+	sinal6:removeSelf()
+	sinal7:removeSelf()
+	sinal8:removeSelf()
+	sinal9:removeSelf()
+	sinal10:removeSelf()
+	sinal11:removeSelf()
+	start:removeSelf()
+	scores:removeSelf()
 
   elseif phase == "did" then
 
@@ -1000,6 +1038,9 @@ end
 
 function scene:destroy( event )
   local sceneGroup = self.view
+	target = nil
+	sinal11 = nil
+	shootPlasma = nil
 
 end
 
